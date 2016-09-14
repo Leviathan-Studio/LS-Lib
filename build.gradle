@@ -1,0 +1,216 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+        maven {
+            url 'http://maven.leviathan-studio.com/artifactory/plugins-release'
+            credentials {
+                username = "${artifactory_user}"
+                password = "${artifactory_password}"
+            }
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.0.0"
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.artifactory'
+
+version = "0.2.0"
+group = "com.leviathanstudio.lib"
+archivesBaseName = "LSLib"
+
+compileJava.options.encoding = 'UTF-8'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+ext.configFile = file('build.properties')
+ext.config = parseConfig(configFile)
+
+ext.buildnumber = config.build_number
+ext.version = version
+
+if (System.getenv().BUILD_NUMBER) {
+    project.buildnumber = System.getenv().BUILD_NUMBER
+    ext.version += "." + System.getenv().BUILD_NUMBER
+}
+else {
+    logger.lifecycle "SETTING BUILDNUMBER TO " + config.build_number
+    project.buildnumber = config.build_number
+    ext.version += "." + config.build_number
+}
+
+dependencies {
+    testCompile "junit:junit:4.12"
+}
+
+minecraft {
+    version = "1.10.2-12.18.1.2011"
+    mappings = "snapshot_20160720"
+    runDir = "eclipse"
+    replace "@VERSION@", project.ext.version
+    makeObfSourceJar = false
+
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'src/main/java/'
+        }
+        resources {
+            srcDirs 'src/main/resources/'
+        }
+    }
+    test {
+        java {
+            srcDirs = ['src/test/java/']
+        }
+    }
+}
+
+processResources
+{
+    inputs.property "version", project.ext.version
+    inputs.property "mcversion", project.minecraft.version
+    from(sourceSets.main.resources.srcDirs) {
+        include 'com/**/**'
+        include 'mcmod.info'
+        expand 'version':project.ext.version, 'mcversion':project.minecraft.version
+    }
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
+
+jar
+{
+    manifest {
+        attributes 'FMLCorePlugin': 'com.leviathanstudio.lib.asm.LSLLoadingPlugin',
+                   'FMLCorePluginContainsFMLMod': 'true',
+                   'group':project.group
+    }
+    appendix = 'universal'
+    version = "${project.ext.version}-mc${project.minecraft.version}"
+}
+
+def parseConfig(File config) {
+    config.withReader {
+        def prop = new Properties()
+        prop.load(it)
+        return (new ConfigSlurper().parse(prop))
+    }
+}
+
+/**
+ * Write some for jenkins
+ */
+task updateInfos {
+	config.mc_version = project.minecraft.version
+	config.version = project.version
+    config.build_number = (project.buildnumber.toString().toInteger()) + 1
+    configFile.withWriter {
+        config.toProperties().store(it, "")
+    }
+}
+
+task devJar(type: Jar) {
+    from(sourceSets.main.allSource) {
+        include 'com/**/**'
+    }
+    from(sourceSets.main.output) {
+        include '**'
+    }
+	manifest {
+        attributes 'FMLCorePlugin': 'com.leviathanstudio.lib.asm.LSLLoadingPlugin',
+                   'FMLCorePluginContainsFMLMod': 'true',
+                   'group':project.group
+    }
+    classifier = 'dev'
+    version = "${project.ext.version}-mc${project.minecraft.version}"
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    from 'build/docs/javadoc'
+    classifier = 'javadoc'
+    version = "${project.ext.version}-mc${project.minecraft.version}"
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+    version = "${project.ext.version}-mc${project.minecraft.version}"
+}
+
+task changelog(type: JenkinsChangelog) {
+
+    // skip if there is no leviacraft jenkins pass
+    onlyIf {
+        project.hasProperty('leviacraftJenkinsPass')
+    }
+
+    outputs.upToDateWhen { false } // never up to date
+    serverRoot = "http://ci.dev-land.fr/"
+    jobName = "LS-Lib"
+    targetBuild = System.env['BUILD_NUMBER'] ?: project.ext.properties.buildNumber ?: 0;
+    authName = "console_script"
+    authPassword = project.hasProperty('leviacraftJenkinsPass') ? project.getProperty('leviacraftJenkinsPass') : "";
+    output = "build/libs/${project.name}-${project.ext.version}-mc${project.minecraft.version}-changelog.txt"
+}
+
+
+artifacts {
+    archives changelog.output
+    archives devJar
+    archives sourcesJar
+    archives javadocJar
+}
+
+repositories {
+    maven {
+        name = "leviathan"
+        url = "http://http://maven.leviathan-studio.com/artifactory/leviathan/"
+    }
+}
+
+artifactory {
+    contextUrl = "${artifactory_contextUrl}"
+    publish {
+        version = "${project.ext.version}-mc${project.minecraft.version}"
+        repository {
+            repoKey = 'leviathan'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+        }
+        defaults {
+            publications ('mavenJava')
+        }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact (devJar) { 
+                classifier = 'dev'
+            }
+        }
+    }
+}
+
+build.dependsOn devJar, changelog, updateInfos

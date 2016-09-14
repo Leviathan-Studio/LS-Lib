@@ -1,0 +1,16 @@
+[
+{
+  "modid": "lslib",
+  "name": "Leviathan Studio Library",
+  "description": "Leviathan Studio Library make your coder life better",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://leviathan-studio.com",
+  "updateUrl": "",
+  "authorList": ["Phenix246"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
