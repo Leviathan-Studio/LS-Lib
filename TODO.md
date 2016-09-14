@@ -1,5 +1,0 @@
-- Area
-- Json configuration file
-- Block / Item registration
-- Sub player name (cf title) + title (cf command)
-- unbreakable block (event)

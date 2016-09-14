@@ -16,3 +16,6 @@ WIP - Area
 TODO - Configuration via JSON + properties
 TODO - Generate basic JSON file (fake resource pack)
 TODO - New Event -> CraftedEvent.{pre; post} // ItemCraftedEvent SlotCrafting.onPickupFromSlot or container : transfertStack
+
+IDEA - Sub player name (cf title) + title (cf command)
+IDEA - unbreakable block (event)
