@@ -65,7 +65,7 @@ public class CraftMatrixUpdateEvent extends PlayerEvent
      * 
      * @return The craft result
      */
-    public ItemStack getRecipeResult()
+    public @Nullable ItemStack getRecipeResult()
     {
         return this.result;
     }
@@ -76,7 +76,7 @@ public class CraftMatrixUpdateEvent extends PlayerEvent
      * @param stack
      *            The new result
      */
-    public void setRecipeResult(ItemStack stack)
+    public void setRecipeResult(@Nullable ItemStack stack)
     {
         this.result = stack;
     }
