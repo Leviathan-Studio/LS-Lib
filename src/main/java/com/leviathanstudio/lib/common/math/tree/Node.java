@@ -5,9 +5,25 @@ public abstract class Node extends AbstractNode<Node>
     /** The parent node **/
     private Node parent;
 
+    /**
+     * 
+     * @param name
+     *            The node name
+     */
     public Node(String name)
     {
         super(name);
+    }
+
+    /**
+     * 
+     * @param node
+     *            The node to copy
+     */
+    protected Node(Node node)
+    {
+        super(node);
+        this.parent = node.parent;
     }
 
     @Override

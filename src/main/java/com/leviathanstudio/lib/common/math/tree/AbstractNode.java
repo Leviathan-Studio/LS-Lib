@@ -31,6 +31,18 @@ public abstract class AbstractNode<T>
     }
 
     /**
+     * 
+     * @param name
+     *            The node name
+     */
+    protected AbstractNode(AbstractNode<T> node)
+    {
+        // Set value
+        this.name = node.name;
+        this.childs = node.getChilds();
+    }
+
+    /**
      * Get the node name
      * 
      * @return The node name

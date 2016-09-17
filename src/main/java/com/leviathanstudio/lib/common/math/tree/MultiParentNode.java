@@ -9,18 +9,26 @@ public abstract class MultiParentNode extends AbstractNode<MultiParentNode>
     /** The parent node **/
     private final List<MultiParentNode> parent;
 
-    private List<MultiParentNode>       cpParent;
-
     /**
      * 
      * @param name
      *            The node name
      */
-    protected MultiParentNode(String name)
+    public MultiParentNode(String name)
     {
         super(name);
         this.parent = Lists.newArrayList();
-        this.cpParent = Lists.newArrayList();
+    }
+
+    /**
+     * 
+     * @param node
+     *            The node to copy
+     */
+    protected MultiParentNode(MultiParentNode node)
+    {
+        super(node);
+        this.parent = node.getParent();
     }
 
     /**
@@ -34,7 +42,6 @@ public abstract class MultiParentNode extends AbstractNode<MultiParentNode>
         if (!this.parent.contains(node))
         {
             this.parent.add(node);
-            this.cpParent = Lists.newArrayList(this.parent);
         }
     }
 
@@ -54,7 +61,7 @@ public abstract class MultiParentNode extends AbstractNode<MultiParentNode>
      */
     public final List<MultiParentNode> getParent()
     {
-        return this.cpParent;
+        return Lists.newArrayList(this.parent);
     }
 
     @Override
