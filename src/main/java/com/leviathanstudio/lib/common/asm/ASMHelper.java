@@ -4,6 +4,8 @@ import java.util.Iterator;
 
 import javax.annotation.Nullable;
 
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.AbstractInsnNode;
@@ -33,6 +35,39 @@ public class ASMHelper
         {
             this(0);
         }
+    }
+
+    /**
+     * Setup a class node with a reader
+     * 
+     * @param basicClass
+     *            The class code
+     * @param readerMode
+     *            The reader mode
+     * @return The ClassNode
+     */
+    public static ClassNode readClass(byte[] basicClass, int readerMode)
+    {
+        ClassNode cnode = new ClassNode();
+        ClassReader cr = new ClassReader(basicClass);
+        cr.accept(cnode, readerMode);
+        return cnode;
+    }
+
+    /**
+     * Setup a class node with a reader
+     * 
+     * @param cnode
+     *            The ClassNode
+     * @param writeMode
+     *            The writer mode
+     * @return The new class code
+     */
+    public static byte[] writeClass(ClassNode cnode, int writeMode)
+    {
+        ClassWriter cw = new ClassWriter(writeMode);
+        cnode.accept(cw);
+        return cw.toByteArray();
     }
 
     /**

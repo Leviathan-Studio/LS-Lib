@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.leviathanstudio.lib.common.asm.ASMHelper;
 import com.leviathanstudio.lib.common.asm.ASMHelper.Access;
+import com.leviathanstudio.lib.common.asm.LSLClassTransformer;
 import com.leviathanstudio.lib.common.asm.MappingHelper;
 import com.leviathanstudio.lib.common.config.simple.ConfigFileManager;
 import com.leviathanstudio.lib.common.config.simple.ConfigFileMeta;
@@ -64,9 +65,7 @@ public class LSLLibClassTransformer extends LSLClassTransformer
 
     private static byte[] patchContainerPlayer(String name, byte[] basicClass)
     {
-        ClassNode cnode = new ClassNode();
-        ClassReader cr = new ClassReader(basicClass);
-        cr.accept(cnode, ClassReader.EXPAND_FRAMES);
+        ClassNode cnode = ASMHelper.readClass(basicClass, ClassReader.EXPAND_FRAMES);
 
         // Class
         String classIIventory = MappingHelper.getName("net.minecraft.inventory.IInventory");
@@ -137,19 +136,13 @@ public class LSLLibClassTransformer extends LSLClassTransformer
         // Add new instructions
         in.insert(insn, out);
 
-        // Write class
-        ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES | ClassWriter.COMPUTE_MAXS);
-        cnode.accept(cw);
-
-        // Return ByteCode
-        return cw.toByteArray();
+        // Write class and Return ByteCode
+        return ASMHelper.writeClass(cnode, ClassWriter.COMPUTE_FRAMES | ClassWriter.COMPUTE_MAXS);
     }
 
     private static byte[] patchContainerWorkbench(String name, byte[] basicClass)
     {
-        ClassNode cnode = new ClassNode();
-        ClassReader cr = new ClassReader(basicClass);
-        cr.accept(cnode, ClassReader.EXPAND_FRAMES);
+        ClassNode cnode = ASMHelper.readClass(basicClass, ClassReader.EXPAND_FRAMES);
 
         // Class
         String classInventoryPlayer = MappingHelper.getName("net.minecraft.entity.player.InventoryPlayer");
@@ -257,12 +250,8 @@ public class LSLLibClassTransformer extends LSLClassTransformer
         // Add new instructions
         in.insert(insn, out);
 
-        // Write class
-        ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES | ClassWriter.COMPUTE_MAXS);
-        cnode.accept(cw);
-
-        // Return ByteCode
-        return cw.toByteArray();
+        // Write class and Return ByteCode
+        return ASMHelper.writeClass(cnode, ClassWriter.COMPUTE_FRAMES | ClassWriter.COMPUTE_MAXS);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.leviathanstudio.lib.asm;
+package com.leviathanstudio.lib.common.asm;
 
 import java.io.File;
 import java.io.InputStream;
