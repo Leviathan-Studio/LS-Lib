@@ -46,7 +46,7 @@ public class TestAbstractTree
     }
 
     @Test
-    public void testSetRoot()
+    public void testSetRoot1()
     {
         Node node = new Node("test")
         {
@@ -55,18 +55,55 @@ public class TestAbstractTree
         tree.setRoot(node);
 
         Node expected1 = node;
-        Node expected2 = node;
+        int expected2 = 1;
+        Node expected3 = node;
 
         Node value1 = tree.getRoot();
-        Node value2 = tree.getNodes().get(0);
+        int value2 = tree.getNodes().size();
+        Node value3 = tree.getNodes().get(0);
 
         Assert.assertThat("root null", value1, is(expected1));
-        Assert.assertThat("root doesn't match", value2, is(expected2));
-
+        Assert.assertThat("wrong list size", value2, is(expected2));
+        Assert.assertThat("root doesn't match", value3, is(expected3));
     }
 
     @Test
-    public void testAddRoot()
+    public void testSetRoot2()
+    {
+        Node node1 = new Node("test1")
+        {
+        };
+
+        Node node2 = new Node("test2")
+        {
+        };
+
+        tree.setRoot(node1);
+        boolean value2 = tree.setRoot(node2);
+
+        Node expected1 = node1;
+        boolean expected2 = false;
+
+        Node value1 = tree.getRoot();
+
+        Assert.assertThat("root null", value1, is(expected1));
+        Assert.assertThat("root re-set", value2, is(expected2));
+    }
+
+    @Test
+    public void testSetRoot3()
+    {
+        Node node = null;
+
+        boolean value1 = tree.setRoot(node);
+
+        boolean expected1 = false;
+
+        Assert.assertThat("root set as null", value1, is(expected1));
+    }
+
+    @Test
+    public void testAddToRoot1()
     {
         Node nodeR = new Node("root")
         {
@@ -79,11 +116,29 @@ public class TestAbstractTree
         tree.setRoot(nodeR);
         tree.addNodeToRoot(node);
 
-        Node expected = node;
+        int expected1 = 2;
+        Node expected2 = node;
 
-        Node value = tree.getNodes().get(1);
+        int value1 = tree.getNodes().size();
+        Node value2 = tree.getNodes().get(1);
 
-        Assert.assertThat("node null", value, is(expected));
-
+        Assert.assertThat("wrong list size", value1, is(expected1));
+        Assert.assertThat("node null", value2, is(expected2));
     }
+
+    @Test
+    public void testAddToRoot2()
+    {
+        Node node = new Node("test")
+        {
+        };
+
+        boolean value1 = tree.addNodeToRoot(node);
+
+        boolean expected1 = false;
+
+        Assert.assertThat("node add to a null root", value1, is(expected1));
+    }
+
+    //
 }
