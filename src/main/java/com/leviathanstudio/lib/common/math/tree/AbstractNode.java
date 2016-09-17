@@ -32,8 +32,8 @@ public abstract class AbstractNode<T>
 
     /**
      * 
-     * @param name
-     *            The node name
+     * @param node
+     *            The node to copy
      */
     protected AbstractNode(AbstractNode<T> node)
     {
