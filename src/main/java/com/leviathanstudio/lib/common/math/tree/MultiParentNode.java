@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
-public abstract class MultiParentNode extends AbstractNode<MultiParentNode>
+public class MultiParentNode extends AbstractNode<MultiParentNode>
 {
     /** The parent node **/
     private final List<MultiParentNode> parent;

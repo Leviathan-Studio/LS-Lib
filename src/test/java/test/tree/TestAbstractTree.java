@@ -48,9 +48,7 @@ public class TestAbstractTree
     @Test
     public void testSetRoot1()
     {
-        Node node = new Node("test")
-        {
-        };
+        Node node = new Node("test");
 
         tree.setRoot(node);
 
@@ -70,13 +68,9 @@ public class TestAbstractTree
     @Test
     public void testSetRoot2()
     {
-        Node node1 = new Node("test1")
-        {
-        };
+        Node node1 = new Node("test1");
 
-        Node node2 = new Node("test2")
-        {
-        };
+        Node node2 = new Node("test2");
 
         tree.setRoot(node1);
         boolean value2 = tree.setRoot(node2);
@@ -105,13 +99,9 @@ public class TestAbstractTree
     @Test
     public void testAddToRoot1()
     {
-        Node nodeR = new Node("root")
-        {
-        };
+        Node nodeR = new Node("root");
 
-        Node node = new Node("test")
-        {
-        };
+        Node node = new Node("test");
 
         tree.setRoot(nodeR);
         tree.addNodeToRoot(node);
@@ -129,9 +119,7 @@ public class TestAbstractTree
     @Test
     public void testAddToRoot2()
     {
-        Node node = new Node("test")
-        {
-        };
+        Node node = new Node("test");
 
         boolean value1 = tree.addNodeToRoot(node);
 

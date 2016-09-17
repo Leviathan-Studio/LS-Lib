@@ -1,6 +1,6 @@
 package com.leviathanstudio.lib.common.math.tree;
 
-public abstract class Node extends AbstractNode<Node>
+public class Node extends AbstractNode<Node>
 {
     /** The parent node **/
     private Node parent;
