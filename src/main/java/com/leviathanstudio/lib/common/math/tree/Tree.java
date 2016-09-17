@@ -13,21 +13,16 @@ public class Tree extends AbstractTree<Node>
     {
         boolean res = true;
 
-        // Test if target is root node
-        if (target.equals(this.getRoot()))
-            res = false;
-        else
+        // Test to prevent loop
+        for (final Node test : this.getNodes())
         {
-            // Test to prevent loop
-            for (final Node test : this.getNodes())
+            // Test if the node isn't a parent
+            if (test.getParent() != null && test.getParent().equals(target))
             {
-                // Test if the node isn't a parent
-                if (test.getParent() != null && test.getParent().equals(target))
-                {
-                    res = false;
-                }
+                res = false;
             }
         }
+
         return res;
     }
 

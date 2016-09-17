@@ -84,7 +84,7 @@ public abstract class AbstractTree<T extends AbstractNode<T>>
         boolean canAdd = true;
 
         // Test the configuration to prevent wrong behavior
-        canAdd = canAdd(parent, node);
+        canAdd = canAddImpl(parent, node);
 
         // Add node if the test is passed
         if (canAdd)
@@ -95,6 +95,33 @@ public abstract class AbstractTree<T extends AbstractNode<T>>
         }
 
         // Return the result
+        return res;
+    }
+
+    private boolean canAddImpl(T parent, T target)
+    {
+        boolean res = true;
+
+        // Test if target is root node
+        if (target.equals(this.getRoot()))
+        {
+            // The root node can't be a child node
+            res = false;
+        }
+
+        // Test if parent is in the tree
+        if (!this.getNodes().contains(parent))
+        {
+            // The parent node should be in the tree
+            res = false;
+        }
+
+        // If those conditions are validate then process implementation test
+        if (res)
+        {
+            res = canAdd(parent, target);
+        }
+
         return res;
     }
 

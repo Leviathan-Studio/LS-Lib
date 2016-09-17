@@ -15,17 +15,9 @@ public class OrientedTree extends AbstractTree<MultiParentNode>
     {
         boolean res = true;
 
-        // Test if target is root node
-        if (target.equals(this.getRoot()))
-        {
-            // The root node can't be a child node
-            res = false;
-        }
-        else
-        {
-            // Test to prevent loop
-            res = canAdd(this.getRoot(), target, target);
-        }
+        // Test to prevent loop
+        res = canAdd(this.getRoot(), target, target);
+
         return res;
     }
 
