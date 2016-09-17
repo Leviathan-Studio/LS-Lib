@@ -14,6 +14,8 @@
 - Block registration by annotation
 - DataManager
 - Area
+- Tree (Math object)
+- Better ASM Helper
 
 ## TODO
 - Configuration via JSON + properties
@@ -23,3 +25,4 @@
 ## IDEA
 - Sub player name (cf title) + title (cf command)
 - unbreakable block (event)
+- Command builder
