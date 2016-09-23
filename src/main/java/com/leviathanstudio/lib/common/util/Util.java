@@ -1,8 +1,6 @@
 package com.leviathanstudio.lib.common.util;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class Util
 {
@@ -10,9 +8,9 @@ public class Util
 
     private static boolean isDebug()
     {
-        if (FMLCommonHandler.instance().getSide().isServer())
+        if (MinecraftUtil.getSide().isServer())
             return false;
-        else if (Minecraft.getMinecraft().mcDataDir.getPath().equals("."))
+        else if (MinecraftUtil.getClientDir().getPath().equals("."))
             return true;
         return false;
     }
