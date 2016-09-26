@@ -65,13 +65,13 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
 
         @Override
-        public Boolean readData(DataInput data) throws IOException
+        public Boolean readStream(DataInput data) throws IOException
         {
             return data.readBoolean();
         }
 
         @Override
-        public void writeData(DataOutput data, Boolean value) throws IOException
+        public void writeStream(DataOutput data, Boolean value) throws IOException
         {
             data.writeBoolean(value);
         }
@@ -142,13 +142,13 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
 
         @Override
-        public Byte readData(DataInput data) throws IOException
+        public Byte readStream(DataInput data) throws IOException
         {
             return data.readByte();
         }
 
         @Override
-        public void writeData(DataOutput data, Byte value) throws IOException
+        public void writeStream(DataOutput data, Byte value) throws IOException
         {
             data.writeByte(value);      
         }
@@ -218,13 +218,13 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
 
         @Override
-        public Short readData(DataInput data) throws IOException
+        public Short readStream(DataInput data) throws IOException
         {
             return data.readShort();
         }
 
         @Override
-        public void writeData(DataOutput data, Short value) throws IOException
+        public void writeStream(DataOutput data, Short value) throws IOException
         {
             data.writeShort(value);      
         }
@@ -294,13 +294,13 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
 
         @Override
-        public Integer readData(DataInput data) throws IOException
+        public Integer readStream(DataInput data) throws IOException
         {
             return data.readInt();
         }
 
         @Override
-        public void writeData(DataOutput data, Integer value) throws IOException
+        public void writeStream(DataOutput data, Integer value) throws IOException
         {
             data.writeInt(value);      
         }
@@ -370,13 +370,13 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
 
         @Override
-        public Long readData(DataInput data) throws IOException
+        public Long readStream(DataInput data) throws IOException
         {
             return data.readLong();
         }
 
         @Override
-        public void writeData(DataOutput data, Long value) throws IOException
+        public void writeStream(DataOutput data, Long value) throws IOException
         {
             data.writeLong(value);      
         }
@@ -446,13 +446,13 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
 
         @Override
-        public Float readData(DataInput data) throws IOException
+        public Float readStream(DataInput data) throws IOException
         {
             return data.readFloat();
         }
 
         @Override
-        public void writeData(DataOutput data, Float value) throws IOException
+        public void writeStream(DataOutput data, Float value) throws IOException
         {
             data.writeFloat(value);      
         }
@@ -522,13 +522,13 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
 
         @Override
-        public Double readData(DataInput data) throws IOException
+        public Double readStream(DataInput data) throws IOException
         {
             return data.readDouble();
         }
 
         @Override
-        public void writeData(DataOutput data, Double value) throws IOException
+        public void writeStream(DataOutput data, Double value) throws IOException
         {
             data.writeDouble(value);      
         }
@@ -591,13 +591,13 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
 
         @Override
-        public String readData(DataInput data) throws IOException
+        public String readStream(DataInput data) throws IOException
         {
             return data.readUTF();
         }
 
         @Override
-        public void writeData(DataOutput data, String value) throws IOException
+        public void writeStream(DataOutput data, String value) throws IOException
         {
             data.writeUTF(value);     
         }
@@ -660,13 +660,13 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
 
         @Override
-        public Character readData(DataInput data) throws IOException
+        public Character readStream(DataInput data) throws IOException
         {
             return data.readChar();
         }
 
         @Override
-        public void writeData(DataOutput data, Character value) throws IOException
+        public void writeStream(DataOutput data, Character value) throws IOException
         {
             data.writeChar(value);      
         }

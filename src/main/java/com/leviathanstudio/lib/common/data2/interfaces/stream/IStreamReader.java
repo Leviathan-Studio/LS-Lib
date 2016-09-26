@@ -5,5 +5,5 @@ import java.io.IOException;
 
 public interface IStreamReader<T>
 {
-    public T readData(DataInput data) throws IOException;
+    public T readStream(DataInput data) throws IOException;
 }
