@@ -82,6 +82,16 @@ public class DataManager
     }
 
     /**
+     * Return true if, and only if, size = 0
+     * 
+     * @return True if size = 0
+     */
+    public boolean isEmpty()
+    {
+        return this.size() == 0;
+    }
+
+    /**
      * Remove all entry
      */
     public void clear()
