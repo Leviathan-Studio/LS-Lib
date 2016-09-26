@@ -81,7 +81,50 @@ public class DataManager
         return this.dataValue.size();
     }
 
+    /**
+     * Remove all entry
+     */
+    public void clear()
+    {
+        this.dataValue.clear();
+        this.dataType.clear();
+    }
+
+    /**
+     * Remove a specific entry
+     * 
+     * @param name
+     *            The name of the entry
+     * @return true if an element has been remove else false
+     */
+    public boolean remove(String name)
+    {
+        if (hasEntry(name))
+        {
+            this.dataValue.remove(name);
+            this.dataType.remove(name);
+            return true;
+        }
+        return false;
+    }
+
     // *********************************************************************************************
+
+    /**
+     * Test if an entry is present
+     * 
+     * @param name
+     *            The name of the entry
+     * @return true if contains the entry else false
+     * @throws IllegalArgumentException
+     *             if the key isn't valid
+     */
+    public boolean hasEntry(String key)
+    {
+        if (key == null || key.isEmpty())
+            throwArgumentException("Key null or empty");
+        return this.dataValue.containsKey(key);
+    }
 
     /**
      * Get the type of an entry by giving its name
@@ -311,7 +354,7 @@ public class DataManager
     private boolean addValue(String key, DataType<?> type, Object value)
     {
         // Key already exists
-        if (this.dataValue.containsKey(key))
+        if (this.hasEntry(key))
             return false;
 
         // Add all the informations
@@ -612,17 +655,21 @@ public class DataManager
 
     private void noValue(String key)
     {
-        throw new IllegalArgumentException(key + " has no entry in the table!");
+        throwArgumentException(key + " has no entry in the table!");
     }
 
     private void invalidValue(String key, Object value)
     {
-        throw new IllegalArgumentException("Invalide value for '" + key + "'");
+        throwArgumentException("Invalide value for '" + key + "'");
     }
 
     private void invalidType(String key, String type)
     {
-        throw new IllegalArgumentException(
-                "Type " + type + " is not valid for '" + key + " (" + this.getType(key) + ")");
+        throwArgumentException("Type " + type + " is not valid for '" + key + " (" + this.getType(key) + ")");
+    }
+
+    private void throwArgumentException(String text)
+    {
+        throw new IllegalArgumentException(text);
     }
 }
