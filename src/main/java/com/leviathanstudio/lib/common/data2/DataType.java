@@ -89,9 +89,9 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
 
         @Override
-        public String toString()
+        public String getType()
         {
-            return super.toString() + "boolean";
+            return "boolean";
         }
     };
     
@@ -166,9 +166,9 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
 
         @Override
-        public String toString()
+        public String getType()
         {
-            return super.toString() + "byte";
+            return "byte";
         }
     };
     
@@ -242,9 +242,9 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
         
         @Override
-        public String toString()
+        public String getType()
         {
-            return super.toString() + "short";
+            return "short";
         }
     };
     
@@ -318,9 +318,9 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
         
         @Override
-        public String toString()
+        public String getType()
         {
-            return super.toString() + "integer";
+            return "integer";
         }
     };
     
@@ -394,9 +394,9 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
         
         @Override
-        public String toString()
+        public String getType()
         {
-            return super.toString() + "long";
+            return "long";
         }
     };
     
@@ -470,9 +470,9 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
         
         @Override
-        public String toString()
+        public String getType()
         {
-            return super.toString() + "float";
+            return "float";
         }
     };
     
@@ -546,9 +546,9 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
         
         @Override
-        public String toString()
+        public String getType()
         {
-            return super.toString() + "double";
+            return "double";
         }
     };
 
@@ -615,9 +615,9 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
         
         @Override
-        public String toString()
+        public String getType()
         {
-            return super.toString() + "string";
+            return "string";
         }
     };
 
@@ -684,15 +684,22 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
         
         @Override
-        public String toString()
+        public String getType()
         {
-            return super.toString() + "character";
+            return "character";
         }
     };
+        
+    public abstract String getType();
     
     @Override
     public String toString()
     {
-        return "data type: ";
+        return "data type: " + getType();
+    }
+    
+    private void unsupportedOperation()
+    {
+        throw new UnsupportedOperationException();
     }
 }
