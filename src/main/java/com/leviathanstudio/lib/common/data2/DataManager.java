@@ -121,8 +121,7 @@ public class DataManager
      */
     public boolean hasEntry(String key)
     {
-        if (key == null || key.isEmpty())
-            throwArgumentException("Key null or empty");
+        isValidKey(key);
         return this.dataValue.containsKey(key);
     }
 
@@ -132,9 +131,12 @@ public class DataManager
      * @param key
      *            The name of the entry
      * @return The type of the entry or null
+     * @throws IllegalArgumentException
+     *             if the key isn't valid
      */
     public @Nullable DataType<?> getType(String key)
     {
+        isValidKey(key);
         return this.dataType.getOrDefault(key, null);
     }
 
@@ -144,9 +146,12 @@ public class DataManager
      * @param key
      *            The name of the entry
      * @return The value of the entry or null
+     * @throws IllegalArgumentException
+     *             if the key isn't valid
      */
     public @Nullable Object getValue(String key)
     {
+        isValidKey(key);
         return this.dataValue.getOrDefault(key, null);
     }
 
@@ -707,6 +712,12 @@ public class DataManager
         // Check if the key type is the same as require
         if (!keyType.equals(type))
             invalidType(key, type.getType());
+    }
+
+    private void isValidKey(String key)
+    {
+        if (key == null || key.isEmpty())
+            throwArgumentException("Key null or empty");
     }
 
     private void noValue(String key)
