@@ -123,7 +123,7 @@ public class DataManager
     /**
      * Test if an entry is present
      * 
-     * @param name
+     * @param key
      *            The name of the entry
      * @return true if contains the entry else false
      * @throws IllegalArgumentException
