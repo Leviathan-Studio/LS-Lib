@@ -163,7 +163,11 @@ public class DataManager
      */
     public boolean replaceValue(String key, Object oldValue, Object newValue)
     {
-        return this.dataValue.replace(key, oldValue, newValue);
+        // same value
+        if (oldValue.equals(newValue))
+            return false;
+        this.dataValue.replace(key, newValue);
+        return true;
     }
 
     /**
@@ -177,7 +181,7 @@ public class DataManager
      */
     public boolean replaceValue(String key, Object newValue)
     {
-        return this.dataValue.replace(key, this.getValue(key), newValue);
+        return this.replaceValue(key, this.getValue(key), newValue);
     }
 
     // *********************************************************************************************
@@ -376,7 +380,7 @@ public class DataManager
      */
     public boolean getBoolean(String key)
     {
-        isValid(key, DataType.BOOLEAN, "boolean");
+        isValid(key, DataType.BOOLEAN);
         return ((Boolean) this.getValue(key));
     }
 
@@ -391,7 +395,7 @@ public class DataManager
      */
     public byte getByte(String key)
     {
-        isValid(key, DataType.BYTE, "byte");
+        isValid(key, DataType.BYTE);
         return ((Number) this.getValue(key)).byteValue();
     }
 
@@ -406,7 +410,7 @@ public class DataManager
      */
     public short getShort(String key)
     {
-        isValid(key, DataType.SHORT, "short");
+        isValid(key, DataType.SHORT);
         return ((Number) this.getValue(key)).shortValue();
     }
 
@@ -421,7 +425,7 @@ public class DataManager
      */
     public int getInteger(String key)
     {
-        isValid(key, DataType.INTEGER, "integer");
+        isValid(key, DataType.INTEGER);
         return ((Number) this.getValue(key)).intValue();
     }
 
@@ -436,7 +440,7 @@ public class DataManager
      */
     public long getLong(String key)
     {
-        isValid(key, DataType.LONG, "long");
+        isValid(key, DataType.LONG);
         return ((Number) this.getValue(key)).longValue();
     }
 
@@ -451,7 +455,7 @@ public class DataManager
      */
     public float getFloat(String key)
     {
-        isValid(key, DataType.FLOAT, "float");
+        isValid(key, DataType.FLOAT);
         return ((Number) this.getValue(key)).floatValue();
     }
 
@@ -466,7 +470,7 @@ public class DataManager
      */
     public double getDouble(String key)
     {
-        isValid(key, DataType.DOUBLE, "double");
+        isValid(key, DataType.DOUBLE);
         return ((Number) this.getValue(key)).doubleValue();
     }
 
@@ -481,7 +485,7 @@ public class DataManager
      */
     public char getCharacter(String key)
     {
-        isValid(key, DataType.CHARACTER, "character");
+        isValid(key, DataType.CHARACTER);
         return ((char) this.getValue(key));
     }
 
@@ -496,7 +500,7 @@ public class DataManager
      */
     public String getString(String key)
     {
-        isValid(key, DataType.STRING, "string");
+        isValid(key, DataType.STRING);
         return ((String) this.getValue(key));
     }
 
@@ -515,7 +519,7 @@ public class DataManager
      */
     public boolean setBoolean(String key, boolean value)
     {
-        isValid(key, DataType.BOOLEAN, "boolean");
+        isValid(key, DataType.BOOLEAN);
         return this.replaceValue(key, value);
     }
 
@@ -532,7 +536,7 @@ public class DataManager
      */
     public boolean setByte(String key, byte value)
     {
-        isValid(key, DataType.BYTE, "byte");
+        isValid(key, DataType.BYTE);
         return this.replaceValue(key, value);
     }
 
@@ -567,7 +571,7 @@ public class DataManager
      */
     public boolean setShort(String key, short value)
     {
-        isValid(key, DataType.BYTE, "short");
+        isValid(key, DataType.SHORT);
         return this.replaceValue(key, value);
     }
 
@@ -602,7 +606,7 @@ public class DataManager
      */
     public boolean setInteger(String key, int value)
     {
-        isValid(key, DataType.BYTE, "integer");
+        isValid(key, DataType.INTEGER);
         return this.replaceValue(key, value);
     }
 
@@ -619,12 +623,12 @@ public class DataManager
      */
     public boolean setLong(String key, long value)
     {
-        isValid(key, DataType.BYTE, "long");
+        isValid(key, DataType.LONG);
         return this.replaceValue(key, value);
     }
 
     /**
-     * Set a new long value for an entry
+     * Set a new float value for an entry
      * 
      * @param name
      *            The name of the entry
@@ -634,14 +638,66 @@ public class DataManager
      * @throws IllegalArgumentException
      *             if the entry dones'nt exist or if the DataType does'nt match
      */
-    public boolean setLong(String key, int value)
+    public boolean setFloat(String key, float value)
     {
-        return setLong(key, (long) value);
+        isValid(key, DataType.FLOAT);
+        return this.replaceValue(key, value);
+    }
+
+    /**
+     * Set a new double value for an entry
+     * 
+     * @param name
+     *            The name of the entry
+     * @param value
+     *            The new value for the entry
+     * @return true if value has changed else false
+     * @throws IllegalArgumentException
+     *             if the entry dones'nt exist or if the DataType does'nt match
+     */
+    public boolean setDouble(String key, double value)
+    {
+        isValid(key, DataType.DOUBLE);
+        return this.replaceValue(key, value);
+    }
+
+    /**
+     * Set a new character value for an entry
+     * 
+     * @param name
+     *            The name of the entry
+     * @param value
+     *            The new value for the entry
+     * @return true if value has changed else false
+     * @throws IllegalArgumentException
+     *             if the entry dones'nt exist or if the DataType does'nt match
+     */
+    public boolean setCharacter(String key, char value)
+    {
+        isValid(key, DataType.CHARACTER);
+        return this.replaceValue(key, value);
+    }
+
+    /**
+     * Set a new string value for an entry
+     * 
+     * @param name
+     *            The name of the entry
+     * @param value
+     *            The new value for the entry
+     * @return true if value has changed else false
+     * @throws IllegalArgumentException
+     *             if the entry dones'nt exist or if the DataType does'nt match
+     */
+    public boolean setString(String key, String value)
+    {
+        isValid(key, DataType.STRING);
+        return this.replaceValue(key, value);
     }
 
     // *********************************************************************************************
 
-    private void isValid(String key, DataType<?> type, String typeName)
+    private void isValid(String key, DataType<?> type)
     {
         DataType<?> keyType = this.getType(key);
 
@@ -650,7 +706,7 @@ public class DataManager
             noValue(key);
         // Check if the key type is the same as require
         if (!keyType.equals(type))
-            invalidType(key, typeName);
+            invalidType(key, type.getType());
     }
 
     private void noValue(String key)
