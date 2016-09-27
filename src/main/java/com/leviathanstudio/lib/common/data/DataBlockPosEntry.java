@@ -4,6 +4,8 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
+import com.leviathanstudio.lib.common.data2.util.DataStreamUtil;
+import com.leviathanstudio.lib.common.data2.util.NBTUtil;
 import com.leviathanstudio.lib.common.network.ByteBufUtil;
 
 import net.minecraft.nbt.NBTTagCompound;

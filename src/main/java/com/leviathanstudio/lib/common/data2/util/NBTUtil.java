@@ -1,4 +1,4 @@
-package com.leviathanstudio.lib.common.data;
+package com.leviathanstudio.lib.common.data2.util;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;

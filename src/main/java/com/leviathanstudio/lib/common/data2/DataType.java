@@ -8,12 +8,12 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.leviathanstudio.lib.common.data.DataStreamUtil;
-import com.leviathanstudio.lib.common.data.NBTUtil;
 import com.leviathanstudio.lib.common.data2.interfaces.bytebuf.IByteBufSerializer;
 import com.leviathanstudio.lib.common.data2.interfaces.nbt.INBTSerializer;
 import com.leviathanstudio.lib.common.data2.interfaces.stream.IStreamSerializer;
 import com.leviathanstudio.lib.common.data2.interfaces.string.IStringSerializer;
+import com.leviathanstudio.lib.common.data2.util.DataStreamUtil;
+import com.leviathanstudio.lib.common.data2.util.NBTUtil;
 import com.leviathanstudio.lib.common.network.ByteBufUtil;
 
 import net.minecraft.item.ItemStack;

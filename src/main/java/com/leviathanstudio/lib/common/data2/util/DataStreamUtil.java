@@ -1,4 +1,4 @@
-package com.leviathanstudio.lib.common.data;
+package com.leviathanstudio.lib.common.data2.util;
 
 import java.io.DataInput;
 import java.io.DataOutput;
