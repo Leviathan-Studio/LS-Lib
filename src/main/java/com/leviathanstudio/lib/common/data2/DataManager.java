@@ -66,7 +66,7 @@ public class DataManager
     /**
      * Create a copy of data manager
      * 
-     * @return a copy of data manager
+     * @return A copy of data manager
      */
     public DataManager copy()
     {
@@ -105,7 +105,7 @@ public class DataManager
      * 
      * @param name
      *            The name of the entry
-     * @return true if an element has been remove else false
+     * @return True if an element has been remove else false
      */
     public boolean remove(String name)
     {
@@ -127,7 +127,7 @@ public class DataManager
      *            The name of the entry
      * @return true if contains the entry else false
      * @throws IllegalArgumentException
-     *             if the key isn't valid
+     *             If the key isn't valid
      */
     public boolean hasEntry(String key)
     {
@@ -142,7 +142,7 @@ public class DataManager
      *            The name of the entry
      * @return The type of the entry or null
      * @throws IllegalArgumentException
-     *             if the key isn't valid
+     *             If the key isn't valid
      */
     public @Nullable DataType<?> getType(String key)
     {
@@ -157,7 +157,7 @@ public class DataManager
      *            The name of the entry
      * @return The value of the entry or null
      * @throws IllegalArgumentException
-     *             if the key isn't valid
+     *             If the key isn't valid
      */
     public @Nullable Object getValue(String key)
     {
@@ -208,7 +208,7 @@ public class DataManager
      *            The name of the entry
      * @param value
      *            The value of the entry
-     * @return true if value has been add to the system else false
+     * @return True if value has been add to the system else false
      */
     public boolean addBoolean(String key, boolean value)
     {
@@ -222,7 +222,7 @@ public class DataManager
      *            The name of the entry
      * @param value
      *            The value of the entry
-     * @return true if value has been add to the system else false
+     * @return True if value has been add to the system else false
      */
     public boolean addByte(String key, byte value)
     {
@@ -236,7 +236,7 @@ public class DataManager
      *            The name of the entry
      * @param value
      *            The value of the entry
-     * @return true if value has been add to the system else false
+     * @return True if value has been add to the system else false
      */
     public boolean addByte(String key, int value)
     {
@@ -252,7 +252,7 @@ public class DataManager
      *            The name of the entry
      * @param value
      *            The value of the entry
-     * @return true if value has been add to the system else false
+     * @return True if value has been add to the system else false
      */
     public boolean addShort(String key, short value)
     {
@@ -266,7 +266,7 @@ public class DataManager
      *            The name of the entry
      * @param value
      *            The value of the entry
-     * @return true if value has been add to the system else false
+     * @return True if value has been add to the system else false
      */
     public boolean addShort(String key, int value)
     {
@@ -282,7 +282,7 @@ public class DataManager
      *            The name of the entry
      * @param value
      *            The value of the entry
-     * @return true if value has been add to the system else false
+     * @return True if value has been add to the system else false
      */
     public boolean addInteger(String key, int value)
     {
@@ -296,7 +296,7 @@ public class DataManager
      *            The name of the entry
      * @param value
      *            The value of the entry
-     * @return true if value has been add to the system else false
+     * @return True if value has been add to the system else false
      */
     public boolean addLong(String key, long value)
     {
@@ -310,7 +310,7 @@ public class DataManager
      *            The name of the entry
      * @param value
      *            The value of the entry
-     * @return true if value has been add to the system else false
+     * @return True if value has been add to the system else false
      */
     public boolean addFloat(String key, float value)
     {
@@ -324,7 +324,7 @@ public class DataManager
      *            The name of the entry
      * @param value
      *            The value of the entry
-     * @return true if value has been add to the system else false
+     * @return True if value has been add to the system else false
      */
     public boolean addDouble(String key, double value)
     {
@@ -338,7 +338,7 @@ public class DataManager
      *            The name of the entry
      * @param value
      *            The value of the entry
-     * @return true if value has been add to the system else false
+     * @return True if value has been add to the system else false
      */
     public boolean addCharacter(String key, char value)
     {
@@ -352,7 +352,7 @@ public class DataManager
      *            The name of the entry
      * @param value
      *            The value of the entry
-     * @return true if value has been add to the system else false
+     * @return True if value has been add to the system else false
      */
     public boolean addString(String key, String value)
     {
@@ -368,7 +368,7 @@ public class DataManager
      *            The type of the entry
      * @param value
      *            The value of the entry
-     * @return true if value has been add to the system else false
+     * @return True if value has been add to the system else false
      */
     private boolean addValue(String key, DataType<?> type, Object value)
     {
@@ -391,7 +391,7 @@ public class DataManager
      *            The name of the entry
      * @return The value of the entry
      * @throws IllegalArgumentException
-     *             if the entry type doesn't match
+     *             If the entry type doesn't match
      */
     public boolean getBoolean(String key)
     {
@@ -406,7 +406,7 @@ public class DataManager
      *            The name of the entry
      * @return The value of the entry
      * @throws IllegalArgumentException
-     *             if the entry type doesn't match
+     *             If the entry type doesn't match
      */
     public byte getByte(String key)
     {
@@ -421,7 +421,7 @@ public class DataManager
      *            The name of the entry
      * @return The value of the entry
      * @throws IllegalArgumentException
-     *             if the entry type doesn't match
+     *             If the entry type doesn't match
      */
     public short getShort(String key)
     {
@@ -436,7 +436,7 @@ public class DataManager
      *            The name of the entry
      * @return The value of the entry
      * @throws IllegalArgumentException
-     *             if the entry type doesn't match
+     *             If the entry type doesn't match
      */
     public int getInteger(String key)
     {
@@ -451,7 +451,7 @@ public class DataManager
      *            The name of the entry
      * @return The value of the entry
      * @throws IllegalArgumentException
-     *             if the entry type doesn't match
+     *             If the entry type doesn't match
      */
     public long getLong(String key)
     {
@@ -466,7 +466,7 @@ public class DataManager
      *            The name of the entry
      * @return The value of the entry
      * @throws IllegalArgumentException
-     *             if the entry type doesn't match
+     *             If the entry type doesn't match
      */
     public float getFloat(String key)
     {
@@ -481,7 +481,7 @@ public class DataManager
      *            The name of the entry
      * @return The value of the entry
      * @throws IllegalArgumentException
-     *             if the entry type doesn't match
+     *             If the entry type doesn't match
      */
     public double getDouble(String key)
     {
@@ -496,7 +496,7 @@ public class DataManager
      *            The name of the entry
      * @return The value of the entry
      * @throws IllegalArgumentException
-     *             if the entry type doesn't match
+     *             If the entry type doesn't match
      */
     public char getCharacter(String key)
     {
@@ -511,7 +511,7 @@ public class DataManager
      *            The name of the entry
      * @return The value of the entry
      * @throws IllegalArgumentException
-     *             if the entry type doesn't match
+     *             If the entry type doesn't match
      */
     public String getString(String key)
     {
@@ -528,9 +528,9 @@ public class DataManager
      *            The name of the entry
      * @param value
      *            The new value for the entry
-     * @return true if value has changed else false
+     * @return True if value has changed else false
      * @throws IllegalArgumentException
-     *             if the entry dones'nt exist or if the DataType does'nt match
+     *             If the entry dones'nt exist or if the DataType does'nt match
      */
     public boolean setBoolean(String key, boolean value)
     {
@@ -545,9 +545,9 @@ public class DataManager
      *            The name of the entry
      * @param value
      *            The new value for the entry
-     * @return true if value has changed else false
+     * @return True if value has changed else false
      * @throws IllegalArgumentException
-     *             if the entry dones'nt exist or if the DataType does'nt match
+     *             If the entry dones'nt exist or if the DataType does'nt match
      */
     public boolean setByte(String key, byte value)
     {
@@ -562,9 +562,9 @@ public class DataManager
      *            The name of the entry
      * @param value
      *            The new value for the entry
-     * @return true if value has changed else false
+     * @return True if value has changed else false
      * @throws IllegalArgumentException
-     *             if the entry dones'nt exist or if the DataType does'nt match
+     *             If the entry dones'nt exist or if the DataType does'nt match
      */
     public boolean setByte(String key, int value)
     {
@@ -580,9 +580,9 @@ public class DataManager
      *            The name of the entry
      * @param value
      *            The new value for the entry
-     * @return true if value has changed else false
+     * @return True if value has changed else false
      * @throws IllegalArgumentException
-     *             if the entry dones'nt exist or if the DataType does'nt match
+     *             If the entry dones'nt exist or if the DataType does'nt match
      */
     public boolean setShort(String key, short value)
     {
@@ -597,9 +597,9 @@ public class DataManager
      *            The name of the entry
      * @param value
      *            The new value for the entry
-     * @return true if value has changed else false
+     * @return True if value has changed else false
      * @throws IllegalArgumentException
-     *             if the entry dones'nt exist or if the DataType does'nt match
+     *             If the entry dones'nt exist or if the DataType does'nt match
      */
     public boolean setShort(String key, int value)
     {
@@ -615,9 +615,9 @@ public class DataManager
      *            The name of the entry
      * @param value
      *            The new value for the entry
-     * @return true if value has changed else false
+     * @return True if value has changed else false
      * @throws IllegalArgumentException
-     *             if the entry dones'nt exist or if the DataType does'nt match
+     *             If the entry dones'nt exist or if the DataType does'nt match
      */
     public boolean setInteger(String key, int value)
     {
@@ -632,9 +632,9 @@ public class DataManager
      *            The name of the entry
      * @param value
      *            The new value for the entry
-     * @return true if value has changed else false
+     * @return True if value has changed else false
      * @throws IllegalArgumentException
-     *             if the entry dones'nt exist or if the DataType does'nt match
+     *             If the entry dones'nt exist or if the DataType does'nt match
      */
     public boolean setLong(String key, long value)
     {
@@ -649,9 +649,9 @@ public class DataManager
      *            The name of the entry
      * @param value
      *            The new value for the entry
-     * @return true if value has changed else false
+     * @return True if value has changed else false
      * @throws IllegalArgumentException
-     *             if the entry dones'nt exist or if the DataType does'nt match
+     *             If the entry dones'nt exist or if the DataType does'nt match
      */
     public boolean setFloat(String key, float value)
     {
@@ -666,9 +666,9 @@ public class DataManager
      *            The name of the entry
      * @param value
      *            The new value for the entry
-     * @return true if value has changed else false
+     * @return True if value has changed else false
      * @throws IllegalArgumentException
-     *             if the entry dones'nt exist or if the DataType does'nt match
+     *             If the entry dones'nt exist or if the DataType does'nt match
      */
     public boolean setDouble(String key, double value)
     {
@@ -683,9 +683,9 @@ public class DataManager
      *            The name of the entry
      * @param value
      *            The new value for the entry
-     * @return true if value has changed else false
+     * @return True if value has changed else false
      * @throws IllegalArgumentException
-     *             if the entry dones'nt exist or if the DataType does'nt match
+     *             If the entry dones'nt exist or if the DataType does'nt match
      */
     public boolean setCharacter(String key, char value)
     {
@@ -700,9 +700,9 @@ public class DataManager
      *            The name of the entry
      * @param value
      *            The new value for the entry
-     * @return true if value has changed else false
+     * @return True if value has changed else false
      * @throws IllegalArgumentException
-     *             if the entry dones'nt exist or if the DataType does'nt match
+     *             If the entry dones'nt exist or if the DataType does'nt match
      */
     public boolean setString(String key, String value)
     {
@@ -712,8 +712,22 @@ public class DataManager
 
     // *********************************************************************************************
 
+    /**
+     * Test if the type of the entry match with the request one
+     * 
+     * @param key
+     *            The name of the entry
+     * @param type
+     *            The type of the entry
+     * @throws IllegalArgumentException
+     *             If the key is not valid
+     */
     private void isValid(String key, DataType<?> type)
     {
+        // Test the key
+        isValidKey(key);
+
+        // Get the potential data type
         DataType<?> keyType = this.getType(key);
 
         // Check if the key exist into the system
@@ -730,7 +744,7 @@ public class DataManager
      * @param key
      *            The key name
      * @throws IllegalArgumentException
-     *             if the key is not valid
+     *             If the key is not valid
      */
     private void isValidKey(String key)
     {
