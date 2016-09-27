@@ -1,14 +1,19 @@
 package com.leviathanstudio.lib.common.data2;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 
+import io.netty.buffer.ByteBuf;
 import jline.internal.Nullable;
 
 public class DataManager
@@ -902,6 +907,72 @@ public class DataManager
     // *********************************************************************************************
 
     /**
+     * Write all the data into the buffer
+     * 
+     * @param buffer
+     *            The byte buffer
+     */
+    public void writeBuffer(ByteBuf buffer)
+    {
+        List<String> list = sortKey();
+
+        for (String key : list)
+        {
+            this.getType(key).writeBufferIn(buffer, this.getValue(key));
+        }
+    }
+
+    /**
+     * Read all the data from the buffer
+     * 
+     * @param buffer
+     *            The byte buffer
+     */
+    public void readBuffer(ByteBuf buffer)
+    {
+        List<String> list = sortKey();
+
+        for (String key : list)
+        {
+            this.replaceValue(key, this.getType(key).readBuffer(buffer));
+        }
+    }
+
+    /**
+     * Write all the data into a NBT tag
+     * 
+     * @return the NBT tag compound
+     */
+    public NBTTagCompound writeNBT()
+    {
+        NBTTagCompound nbt = new NBTTagCompound();
+
+        for (String key : this.dataValue.keySet())
+        {
+            this.getType(key).writeNBTIn(nbt, key, this.getValue(key));
+
+        }
+
+        return nbt;
+    }
+
+    /**
+     * Read all the data from a NBT tag
+     * 
+     * @param nbt
+     *            the NBT tag compound
+     */
+    public void readNBT(NBTTagCompound nbt)
+    {
+        for (String key : this.dataValue.keySet())
+        {
+            this.replaceValue(key, this.getType(key).readNBT(nbt, key));
+        }
+    }
+
+    // *********************************************************************************************
+
+    /**
      * Test if the type of the entry match with the request one
      * 
      * @param key
@@ -960,4 +1031,19 @@ public class DataManager
     {
         throw new IllegalArgumentException(text);
     }
+
+    // *********************************************************************************************
+
+    private List<String> sortKey()
+    {
+        List<String> list = Lists.newArrayList(this.dataValue.keySet());
+        Collections.sort(list, sorter);
+        return list;
+    }
+
+    @SuppressWarnings("unchecked")
+    private static Comparator<String> sorter = (ob1, ob2) ->
+    {
+        return ob1.compareToIgnoreCase(ob2);
+    };
 }

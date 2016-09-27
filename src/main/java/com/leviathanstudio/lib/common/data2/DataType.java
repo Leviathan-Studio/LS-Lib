@@ -986,6 +986,16 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
             
     public abstract String getType();
     
+    @SuppressWarnings("unchecked")
+    public void writeBufferIn(ByteBuf buffer, Object value) {
+        this.writeBuffer(buffer, (T)value);
+    }
+    
+    @SuppressWarnings("unchecked")
+    public void writeNBTIn(NBTTagCompound buffer, String name, Object value) {
+        this.writeNBT(buffer, name, (T)value);
+    }
+
     @Override
     public String toString()
     {
