@@ -524,7 +524,7 @@ public class DataManager
     /**
      * Set a new boolean value for an entry
      * 
-     * @param name
+     * @param key
      *            The name of the entry
      * @param value
      *            The new value for the entry
@@ -541,7 +541,7 @@ public class DataManager
     /**
      * Set a new byte value for an entry
      * 
-     * @param name
+     * @param key
      *            The name of the entry
      * @param value
      *            The new value for the entry
@@ -558,7 +558,7 @@ public class DataManager
     /**
      * Set a new byte value for an entry
      * 
-     * @param name
+     * @param key
      *            The name of the entry
      * @param value
      *            The new value for the entry
@@ -576,7 +576,7 @@ public class DataManager
     /**
      * Set a new short value for an entry
      * 
-     * @param name
+     * @param key
      *            The name of the entry
      * @param value
      *            The new value for the entry
@@ -593,7 +593,7 @@ public class DataManager
     /**
      * Set a new short value for an entry
      * 
-     * @param name
+     * @param key
      *            The name of the entry
      * @param value
      *            The new value for the entry
@@ -611,7 +611,7 @@ public class DataManager
     /**
      * Set a new int value for an entry
      * 
-     * @param name
+     * @param key
      *            The name of the entry
      * @param value
      *            The new value for the entry
@@ -628,7 +628,7 @@ public class DataManager
     /**
      * Set a new long value for an entry
      * 
-     * @param name
+     * @param key
      *            The name of the entry
      * @param value
      *            The new value for the entry
@@ -645,7 +645,7 @@ public class DataManager
     /**
      * Set a new float value for an entry
      * 
-     * @param name
+     * @param key
      *            The name of the entry
      * @param value
      *            The new value for the entry
@@ -662,7 +662,7 @@ public class DataManager
     /**
      * Set a new double value for an entry
      * 
-     * @param name
+     * @param key
      *            The name of the entry
      * @param value
      *            The new value for the entry
@@ -679,7 +679,7 @@ public class DataManager
     /**
      * Set a new character value for an entry
      * 
-     * @param name
+     * @param key
      *            The name of the entry
      * @param value
      *            The new value for the entry
@@ -696,7 +696,7 @@ public class DataManager
     /**
      * Set a new string value for an entry
      * 
-     * @param name
+     * @param key
      *            The name of the entry
      * @param value
      *            The new value for the entry
@@ -724,6 +724,14 @@ public class DataManager
             invalidType(key, type.getType());
     }
 
+    /**
+     * Test if a key is valid
+     * 
+     * @param key
+     *            The key name
+     * @throws IllegalArgumentException
+     *             if the key is not valid
+     */
     private void isValidKey(String key)
     {
         if (key == null || key.isEmpty())
