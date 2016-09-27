@@ -999,7 +999,7 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
     }
     
     @SuppressWarnings("unchecked")
-    public void writeStreamIn(DataOutput stream, Object value)  throws IOException
+    public void writeStreamIn(DataOutput stream, Object value) throws IOException
     {
         this.writeStream(stream, (T)value);
     }    
