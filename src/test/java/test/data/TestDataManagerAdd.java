@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import com.leviathanstudio.lib.common.data2.DataManager;
 
+import net.minecraft.util.math.BlockPos;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -365,6 +367,41 @@ public class TestDataManagerAdd
 
         boolean value1 = data.addUUID("UUID1", UUID.fromString("0c22e844-4ecb-48d4-a3c3-f083ddb1df3b"));
         boolean value2 = data.addUUID("UUID1", UUID.fromString("ac56a704-260b-45f5-85ac-e1b451bb79bc"));
+
+        Assert.assertThat("adding problem 1", value1, is(expected1));
+        Assert.assertThat("adding problem 2", value2, is(expected2));
+    }
+
+    @Test
+    public void addBlockPos1()
+    {
+        boolean expected = true;
+
+        boolean value = data.addBlockPos("BlockPos1", new BlockPos(1, 2, 3));
+
+        Assert.assertThat("not add", value, is(expected));
+    }
+
+    @Test
+    public void addBlockPos2()
+    {
+        BlockPos expected = new BlockPos(1, 2, 3);
+
+        data.addBlockPos("BlockPos1", new BlockPos(1, 2, 3));
+
+        BlockPos value = data.getBlockPos("BlockPos1");
+
+        Assert.assertThat("different value", value, is(expected));
+    }
+
+    @Test
+    public void addBlockPos3()
+    {
+        boolean expected1 = true;
+        boolean expected2 = false;
+
+        boolean value1 = data.addBlockPos("BlockPos1", new BlockPos(1, 2, 3));
+        boolean value2 = data.addBlockPos("BlockPos1", new BlockPos(3, 2, 1));
 
         Assert.assertThat("adding problem 1", value1, is(expected1));
         Assert.assertThat("adding problem 2", value2, is(expected2));

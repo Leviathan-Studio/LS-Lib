@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import com.leviathanstudio.lib.common.data2.DataManager;
 
+import net.minecraft.util.math.BlockPos;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +30,7 @@ public class TestDataManagerGet
         data.addCharacter("char1", 'c');
         data.addString("String1", "S");
         data.addUUID("UUID1", UUID.fromString("0c22e844-4ecb-48d4-a3c3-f083ddb1df3b"));
-
+        data.addBlockPos("BlockPos1", new BlockPos(1, 2, 3));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -275,5 +277,26 @@ public class TestDataManagerGet
     public void getUUID3()
     {
         data.getBoolean("UUID1");
+    }
+
+    @Test
+    public void getBlockPos1()
+    {
+        BlockPos expected = new BlockPos(1, 2, 3);
+        BlockPos value = data.getBlockPos("BlockPos1");
+
+        Assert.assertThat("wrong initialization", value, is(expected));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getBlockPos2()
+    {
+        data.getBlockPos("BlockPos2");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getBlockPos3()
+    {
+        data.getBoolean("BlockPos1");
     }
 }

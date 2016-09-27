@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import com.leviathanstudio.lib.common.data2.DataManager;
 
+import net.minecraft.util.math.BlockPos;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -56,7 +58,7 @@ public class TestDataManagerSet
         boolean value3 = data.getBoolean("boolean1");
 
         Assert.assertThat("wrong initialization", value1, is(expected1));
-        Assert.assertThat("not change", value2, is(expected2));
+        Assert.assertThat("value change", value2, is(expected2));
         Assert.assertThat("wrong value", value3, is(expected3));
     }
 
@@ -96,7 +98,7 @@ public class TestDataManagerSet
         byte value3 = data.getByte("byte1");
 
         Assert.assertThat("wrong initialization", value1, is(expected1));
-        Assert.assertThat("not change", value2, is(expected2));
+        Assert.assertThat("value change", value2, is(expected2));
         Assert.assertThat("wrong value", value3, is(expected3));
     }
 
@@ -136,7 +138,7 @@ public class TestDataManagerSet
         short value3 = data.getShort("short1");
 
         Assert.assertThat("wrong initialization", value1, is(expected1));
-        Assert.assertThat("not change", value2, is(expected2));
+        Assert.assertThat("value change", value2, is(expected2));
         Assert.assertThat("wrong value", value3, is(expected3));
     }
 
@@ -176,7 +178,7 @@ public class TestDataManagerSet
         int value3 = data.getInteger("int1");
 
         Assert.assertThat("wrong initialization", value1, is(expected1));
-        Assert.assertThat("not change", value2, is(expected2));
+        Assert.assertThat("value change", value2, is(expected2));
         Assert.assertThat("wrong value", value3, is(expected3));
     }
 
@@ -216,7 +218,7 @@ public class TestDataManagerSet
         long value3 = data.getLong("long1");
 
         Assert.assertThat("wrong initialization", value1, is(expected1));
-        Assert.assertThat("not change", value2, is(expected2));
+        Assert.assertThat("value change", value2, is(expected2));
         Assert.assertThat("wrong value", value3, is(expected3));
     }
 
@@ -256,7 +258,7 @@ public class TestDataManagerSet
         float value3 = data.getFloat("float1");
 
         Assert.assertThat("wrong initialization", value1, is(expected1));
-        Assert.assertThat("not change", value2, is(expected2));
+        Assert.assertThat("value change", value2, is(expected2));
         Assert.assertThat("wrong value", value3, is(expected3));
     }
 
@@ -296,7 +298,7 @@ public class TestDataManagerSet
         double value3 = data.getDouble("double1");
 
         Assert.assertThat("wrong initialization", value1, is(expected1));
-        Assert.assertThat("not change", value2, is(expected2));
+        Assert.assertThat("value change", value2, is(expected2));
         Assert.assertThat("wrong value", value3, is(expected3));
     }
 
@@ -336,7 +338,7 @@ public class TestDataManagerSet
         char value3 = data.getCharacter("char1");
 
         Assert.assertThat("wrong initialization", value1, is(expected1));
-        Assert.assertThat("not change", value2, is(expected2));
+        Assert.assertThat("value change", value2, is(expected2));
         Assert.assertThat("wrong value", value3, is(expected3));
     }
 
@@ -376,7 +378,7 @@ public class TestDataManagerSet
         String value3 = data.getString("String1");
 
         Assert.assertThat("wrong initialization", value1, is(expected1));
-        Assert.assertThat("not change", value2, is(expected2));
+        Assert.assertThat("value change", value2, is(expected2));
         Assert.assertThat("wrong value", value3, is(expected3));
     }
 
@@ -416,7 +418,47 @@ public class TestDataManagerSet
         UUID value3 = data.getUUID("UUID1");
 
         Assert.assertThat("wrong initialization", value1, is(expected1));
+        Assert.assertThat("value change", value2, is(expected2));
+        Assert.assertThat("wrong value", value3, is(expected3));
+    }
+
+    @Test
+    public void setBlockPos1()
+    {
+        BlockPos expected1 = new BlockPos(1, 2, 3);
+        boolean expected2 = true;
+        BlockPos expected3 = new BlockPos(3, 2, 1);
+
+        data.addBlockPos("BlockPos1", new BlockPos(1, 2, 3));
+
+        BlockPos value1 = data.getBlockPos("BlockPos1");
+
+        boolean value2 = data.setBlockPos("BlockPos1", new BlockPos(3, 2, 1));
+
+        BlockPos value3 = data.getBlockPos("BlockPos1");
+
+        Assert.assertThat("wrong initialization", value1, is(expected1));
         Assert.assertThat("not change", value2, is(expected2));
+        Assert.assertThat("wrong value", value3, is(expected3));
+    }
+
+    @Test
+    public void setBlockPos2()
+    {
+        BlockPos expected1 = new BlockPos(1, 2, 3);
+        boolean expected2 = false;
+        BlockPos expected3 = new BlockPos(1, 2, 3);
+
+        data.addBlockPos("BlockPos1", new BlockPos(1, 2, 3));
+
+        BlockPos value1 = data.getBlockPos("BlockPos1");
+
+        boolean value2 = data.setBlockPos("BlockPos1", new BlockPos(1, 2, 3));
+
+        BlockPos value3 = data.getBlockPos("BlockPos1");
+
+        Assert.assertThat("wrong initialization", value1, is(expected1));
+        Assert.assertThat("value change", value2, is(expected2));
         Assert.assertThat("wrong value", value3, is(expected3));
     }
 }
