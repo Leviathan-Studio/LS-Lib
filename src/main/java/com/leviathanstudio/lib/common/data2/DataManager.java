@@ -149,6 +149,15 @@ public class DataManager
     }
 
     /**
+     * 
+     * @return an array which contains all the register key in this data manager
+     */
+    public String[] getAllKeys()
+    {
+        return this.dataValue.keySet().toArray(new String[this.dataValue.size()]);
+    }
+
+    /**
      * Get the type of an entry by giving its name
      * 
      * @param key
@@ -978,6 +987,8 @@ public class DataManager
      * 
      * @param stream
      *            The output stream
+     * @throws IOException
+     *             If there is a problem with the stream
      */
     public void writeStream(DataOutput stream) throws IOException
     {
@@ -994,6 +1005,8 @@ public class DataManager
      * 
      * @param stream
      *            The input stream
+     * @throws IOException
+     *             If there is a problem with the stream
      */
     public void readStream(DataInput stream) throws IOException
     {
@@ -1069,6 +1082,11 @@ public class DataManager
 
     // *********************************************************************************************
 
+    /**
+     * Sort the key list by alphabetical order
+     * 
+     * @return A sorted list of key
+     */
     private List<String> sortKey()
     {
         List<String> list = Lists.newArrayList(this.dataValue.keySet());
@@ -1076,6 +1094,9 @@ public class DataManager
         return list;
     }
 
+    /**
+     * The comparator use by the sorter
+     */
     private static Comparator<String> sorter = (ob1, ob2) ->
     {
         return ob1.compareToIgnoreCase(ob2);
