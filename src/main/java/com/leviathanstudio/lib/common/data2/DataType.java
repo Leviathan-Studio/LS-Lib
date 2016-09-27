@@ -4,11 +4,14 @@ package com.leviathanstudio.lib.common.data2;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
+import java.util.UUID;
 
+import com.leviathanstudio.lib.common.data.DataStreamUtil;
 import com.leviathanstudio.lib.common.data2.interfaces.bytebuf.IByteBufSerializer;
 import com.leviathanstudio.lib.common.data2.interfaces.nbt.INBTSerializer;
 import com.leviathanstudio.lib.common.data2.interfaces.stream.IStreamSerializer;
 import com.leviathanstudio.lib.common.data2.interfaces.string.IStringSerializer;
+import com.leviathanstudio.lib.common.network.ByteBufUtil;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagByte;
@@ -689,6 +692,77 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
             return "character";
         }
     };
+    
+    public static final DataType<UUID>      UUID      = new DataType<UUID>()
+    {
+        @Override
+        public UUID readString(String text)
+        {
+            return java.util.UUID.fromString(text);
+        }
+
+        @Override
+        public String writeString(UUID value)
+        {
+            return value.toString();
+        }
+
+        @Override
+        public boolean checkParseType(String text)
+        {
+            return text.length() == 36;       
+        }
+
+        @Override
+        public UUID readNBT(NBTTagCompound nbt, String name)
+        {
+            return nbt.getUniqueId(name);
+        }
+
+        @Override
+        public void writeNBT(NBTTagCompound nbt, String name, UUID value)
+        {
+            nbt.setUniqueId(name, value);
+        }
+
+        @Override
+        public boolean checkTagType(NBTBase tag)
+        {
+            return tag instanceof NBTTagLong;
+        }
+
+        @Override
+        public UUID readStream(DataInput data) throws IOException
+        {
+            return DataStreamUtil.readUUID(data);
+        }
+
+        @Override
+        public void writeStream(DataOutput data, UUID value) throws IOException
+        {
+            DataStreamUtil.writeUUID(data, value);
+        }
+
+        @Override
+        public UUID readBuffer(ByteBuf buffer)
+        {
+            return ByteBufUtil.readUUID(buffer);
+        }
+
+        @Override
+        public void writeBuffer(ByteBuf buffer, UUID value)
+        {
+            ByteBufUtil.writeUUID(buffer, value);
+        }
+        
+        @Override
+        public String getType()
+        {
+            return "UUID";
+        }
+    };
+    
+  //TODO add ItemStack, nbt tag, block pos
         
     public abstract String getType();
     

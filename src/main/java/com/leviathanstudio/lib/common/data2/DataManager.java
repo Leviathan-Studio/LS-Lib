@@ -1,6 +1,7 @@
 package com.leviathanstudio.lib.common.data2;
 
 import java.util.Map;
+import java.util.UUID;
 
 import com.google.common.collect.Maps;
 
@@ -360,6 +361,20 @@ public class DataManager
     }
 
     /**
+     * Add a new UUID value to the system
+     * 
+     * @param key
+     *            The name of the entry
+     * @param value
+     *            The value of the entry
+     * @return True if value has been add to the system else false
+     */
+    public boolean addUUID(String key, UUID value)
+    {
+        return addValue(key, DataType.UUID, value);
+    }
+
+    /**
      * Add a new value to the system
      * 
      * @param key
@@ -517,6 +532,21 @@ public class DataManager
     {
         isValid(key, DataType.STRING);
         return ((String) this.getValue(key));
+    }
+
+    /**
+     * Get a UUID value by giving its name
+     * 
+     * @param key
+     *            The name of the entry
+     * @return The value of the entry
+     * @throws IllegalArgumentException
+     *             If the entry type doesn't match
+     */
+    public UUID getUUID(String key)
+    {
+        isValid(key, DataType.UUID);
+        return ((UUID) this.getValue(key));
     }
 
     // *********************************************************************************************
@@ -707,6 +737,23 @@ public class DataManager
     public boolean setString(String key, String value)
     {
         isValid(key, DataType.STRING);
+        return this.replaceValue(key, value);
+    }
+
+    /**
+     * Set a new UUID value for an entry
+     * 
+     * @param key
+     *            The name of the entry
+     * @param value
+     *            The new value for the entry
+     * @return True if value has changed else false
+     * @throws IllegalArgumentException
+     *             If the entry dones'nt exist or if the DataType does'nt match
+     */
+    public boolean setUUID(String key, UUID value)
+    {
+        isValid(key, DataType.UUID);
         return this.replaceValue(key, value);
     }
 
