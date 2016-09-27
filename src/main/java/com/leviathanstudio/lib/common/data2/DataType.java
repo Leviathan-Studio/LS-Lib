@@ -5,8 +5,11 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.leviathanstudio.lib.common.data.DataStreamUtil;
+import com.leviathanstudio.lib.common.data.NBTUtil;
 import com.leviathanstudio.lib.common.data2.interfaces.bytebuf.IByteBufSerializer;
 import com.leviathanstudio.lib.common.data2.interfaces.nbt.INBTSerializer;
 import com.leviathanstudio.lib.common.data2.interfaces.stream.IStreamSerializer;
@@ -22,6 +25,7 @@ import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.nbt.NBTTagLong;
 import net.minecraft.nbt.NBTTagShort;
 import net.minecraft.nbt.NBTTagString;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 import io.netty.buffer.ByteBuf;
@@ -762,7 +766,81 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
     };
     
-  //TODO add ItemStack, nbt tag, block pos
+    public static final DataType<BlockPos>  BLOCK_POS = new DataType<BlockPos>()
+    {
+        String regex = "^BlockPos{x=-?[0-9]+, y=[0-9]+, z=-?[0-9]+}$";
+        
+        @Override
+        public BlockPos readString(String text)
+        {
+            Matcher m = Pattern.compile(regex).matcher(text);
+            return new BlockPos(Double.parseDouble(m.group(1)), Double.parseDouble(m.group(2)), Double.parseDouble(m.group(3)));
+        }
+
+        @Override
+        public String writeString(BlockPos value)
+        {
+            return value.toString();
+        }
+
+        @Override
+        public boolean checkParseType(String text)
+        {
+            return text.matches(regex);
+        }
+
+        @Override
+        public BlockPos readNBT(NBTTagCompound nbt, String name)
+        {
+            return NBTUtil.readBlockPos(nbt, name);
+        }
+
+        @Override
+        public void writeNBT(NBTTagCompound nbt, String name, BlockPos value)
+        {
+            NBTUtil.writeBlockPos(nbt, name, value);
+
+        }
+
+        @Override
+        public boolean checkTagType(NBTBase tag)
+        {
+            return tag instanceof NBTTagLong;
+        }
+
+        @Override
+        public BlockPos readStream(DataInput data) throws IOException
+        {
+            return DataStreamUtil.readBlockPos(data);
+        }
+
+        @Override
+        public void writeStream(DataOutput data, BlockPos value) throws IOException
+        {
+            DataStreamUtil.writeBlockPos(data, value);
+        }
+
+        @Override
+        public BlockPos readBuffer(ByteBuf buffer)
+        {
+            return ByteBufUtil.readBlockPos(buffer);
+        }
+
+        @Override
+        public void writeBuffer(ByteBuf buffer, BlockPos value)
+        {
+            ByteBufUtil.writeBlockPos(buffer, value);
+        }
+        
+        @Override
+        public String getType()
+        {
+            return "BlockPos";
+        }
+    };
+    
+    
+  //TODO add ItemStack, nbt tag
         
     public abstract String getType();
     

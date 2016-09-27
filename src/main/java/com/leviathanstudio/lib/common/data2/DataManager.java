@@ -5,6 +5,8 @@ import java.util.UUID;
 
 import com.google.common.collect.Maps;
 
+import net.minecraft.util.math.BlockPos;
+
 import jline.internal.Nullable;
 
 public class DataManager
@@ -375,6 +377,20 @@ public class DataManager
     }
 
     /**
+     * Add a new BlockPos value to the system
+     * 
+     * @param key
+     *            The name of the entry
+     * @param value
+     *            The value of the entry
+     * @return True if value has been add to the system else false
+     */
+    public boolean addUUID(String key, BlockPos value)
+    {
+        return addValue(key, DataType.BLOCK_POS, value);
+    }
+
+    /**
      * Add a new value to the system
      * 
      * @param key
@@ -547,6 +563,21 @@ public class DataManager
     {
         isValid(key, DataType.UUID);
         return ((UUID) this.getValue(key));
+    }
+
+    /**
+     * Get a BlockPos value by giving its name
+     * 
+     * @param key
+     *            The name of the entry
+     * @return The value of the entry
+     * @throws IllegalArgumentException
+     *             If the entry type doesn't match
+     */
+    public BlockPos getBlockPos(String key)
+    {
+        isValid(key, DataType.BLOCK_POS);
+        return ((BlockPos) this.getValue(key));
     }
 
     // *********************************************************************************************
@@ -754,6 +785,23 @@ public class DataManager
     public boolean setUUID(String key, UUID value)
     {
         isValid(key, DataType.UUID);
+        return this.replaceValue(key, value);
+    }
+
+    /**
+     * Set a new BlockPos value for an entry
+     * 
+     * @param key
+     *            The name of the entry
+     * @param value
+     *            The new value for the entry
+     * @return True if value has changed else false
+     * @throws IllegalArgumentException
+     *             If the entry dones'nt exist or if the DataType does'nt match
+     */
+    public boolean setBlockPos(String key, BlockPos value)
+    {
+        isValid(key, DataType.BLOCK_POS);
         return this.replaceValue(key, value);
     }
 
