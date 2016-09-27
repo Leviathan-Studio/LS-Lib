@@ -4,7 +4,7 @@ import static org.hamcrest.CoreMatchers.*;
 
 import java.util.UUID;
 
-import com.leviathanstudio.lib.common.data.DataManager;
+import com.leviathanstudio.lib.common.data2.DataManager;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -17,7 +17,7 @@ public class TestDataManagerGet
     @Before
     public void setupUp()
     {
-        data = DataManager.createDataManager();
+        data = DataManager.create();
         data.addBoolean("boolean1", false);
         data.addByte("byte1", 1);
         data.addShort("short1", 2);
@@ -32,15 +32,27 @@ public class TestDataManagerGet
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void getEntry1()
+    public void getValue1()
     {
-        data.getEntry("");
+        data.getValue("");
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void getEntry2()
+    public void getValue2()
     {
-        data.getEntry(null);
+        data.getValue(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getType1()
+    {
+        data.getType("");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getType2()
+    {
+        data.getType(null);
     }
 
     @Test(expected = IllegalArgumentException.class)

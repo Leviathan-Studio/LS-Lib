@@ -2,7 +2,7 @@ package test.data;
 
 import static org.hamcrest.CoreMatchers.*;
 
-import com.leviathanstudio.lib.common.data.DataManager;
+import com.leviathanstudio.lib.common.data2.DataManager;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -15,7 +15,7 @@ public class TestDataManagerSize
     @Before
     public void setupUp()
     {
-        data = DataManager.createDataManager();
+        data = DataManager.create();
     }
 
     @Test
@@ -23,7 +23,7 @@ public class TestDataManagerSize
     {
         int expected = 0;
 
-        int value = data.getEntries().size();
+        int value = data.size();
 
         Assert.assertThat("list not empty", value, is(expected));
     }
@@ -35,9 +35,9 @@ public class TestDataManagerSize
         int expected2 = 0;
 
         data.addBoolean("boolean1", true);
-        int value1 = data.getEntries().size();
+        int value1 = data.size();
         data.clear();
-        int value2 = data.getEntries().size();
+        int value2 = data.size();
 
         Assert.assertThat("list empty", value1, is(expected1));
 

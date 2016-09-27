@@ -4,7 +4,7 @@ import static org.hamcrest.CoreMatchers.*;
 
 import java.util.UUID;
 
-import com.leviathanstudio.lib.common.data.DataManager;
+import com.leviathanstudio.lib.common.data2.DataManager;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -17,7 +17,7 @@ public class TestDataManagerSet
     @Before
     public void setupUp()
     {
-        data = DataManager.createDataManager();
+        data = DataManager.create();
     }
 
     @Test
