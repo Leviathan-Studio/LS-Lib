@@ -1059,7 +1059,7 @@ public class DataManager
 
     private void invalidType(String key, String type)
     {
-        throwArgumentException("Type " + type + " is not valid for '" + key + " (" + this.getType(key) + ")");
+        throwArgumentException("Type " + type + " is not valid for '" + key + "' (" + this.getType(key) + ")");
     }
 
     private void throwArgumentException(String text)
@@ -1076,7 +1076,6 @@ public class DataManager
         return list;
     }
 
-    @SuppressWarnings("unchecked")
     private static Comparator<String> sorter = (ob1, ob2) ->
     {
         return ob1.compareToIgnoreCase(ob2);
