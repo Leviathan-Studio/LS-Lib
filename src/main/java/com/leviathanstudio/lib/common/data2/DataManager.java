@@ -1,5 +1,8 @@
 package com.leviathanstudio.lib.common.data2;
 
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -967,6 +970,38 @@ public class DataManager
         for (String key : this.dataValue.keySet())
         {
             this.replaceValue(key, this.getType(key).readNBT(nbt, key));
+        }
+    }
+
+    /**
+     * Write all the data into the stream
+     * 
+     * @param stream
+     *            The output stream
+     */
+    public void writeStream(DataOutput stream) throws IOException
+    {
+        List<String> list = sortKey();
+
+        for (String key : list)
+        {
+            this.getType(key).writeStreamIn(stream, this.getValue(key));
+        }
+    }
+
+    /**
+     * Read all the data from the stream
+     * 
+     * @param stream
+     *            The input stream
+     */
+    public void readStream(DataInput stream) throws IOException
+    {
+        List<String> list = sortKey();
+
+        for (String key : list)
+        {
+            this.replaceValue(key, this.getType(key).readStream(stream));
         }
     }
 
