@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import com.google.common.collect.Maps;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 
 import jline.internal.Nullable;
@@ -385,9 +386,23 @@ public class DataManager
      *            The value of the entry
      * @return True if value has been add to the system else false
      */
-    public boolean addUUID(String key, BlockPos value)
+    public boolean addBlockPos(String key, BlockPos value)
     {
         return addValue(key, DataType.BLOCK_POS, value);
+    }
+
+    /**
+     * Add a new ItemStack value to the system
+     * 
+     * @param key
+     *            The name of the entry
+     * @param value
+     *            The value of the entry
+     * @return True if value has been add to the system else false
+     */
+    public boolean addItemStack(String key, ItemStack value)
+    {
+        return addValue(key, DataType.ITEM_STACK, value);
     }
 
     /**
@@ -578,6 +593,21 @@ public class DataManager
     {
         isValid(key, DataType.BLOCK_POS);
         return ((BlockPos) this.getValue(key));
+    }
+
+    /**
+     * Get a ItemStack value by giving its name
+     * 
+     * @param key
+     *            The name of the entry
+     * @return The value of the entry
+     * @throws IllegalArgumentException
+     *             If the entry type doesn't match
+     */
+    public ItemStack getItemStack(String key)
+    {
+        isValid(key, DataType.ITEM_STACK);
+        return ((ItemStack) this.getValue(key));
     }
 
     // *********************************************************************************************
@@ -802,6 +832,23 @@ public class DataManager
     public boolean setBlockPos(String key, BlockPos value)
     {
         isValid(key, DataType.BLOCK_POS);
+        return this.replaceValue(key, value);
+    }
+
+    /**
+     * Set a new BLOCK_POS value for an entry
+     * 
+     * @param key
+     *            The name of the entry
+     * @param value
+     *            The new value for the entry
+     * @return True if value has changed else false
+     * @throws IllegalArgumentException
+     *             If the entry dones'nt exist or if the DataType does'nt match
+     */
+    public boolean setBLOCK_POS(String key, ItemStack value)
+    {
+        isValid(key, DataType.ITEM_STACK);
         return this.replaceValue(key, value);
     }
 

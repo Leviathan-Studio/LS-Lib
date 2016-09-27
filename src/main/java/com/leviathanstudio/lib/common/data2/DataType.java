@@ -16,6 +16,7 @@ import com.leviathanstudio.lib.common.data2.interfaces.stream.IStreamSerializer;
 import com.leviathanstudio.lib.common.data2.interfaces.string.IStringSerializer;
 import com.leviathanstudio.lib.common.network.ByteBufUtil;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.nbt.NBTTagCompound;
@@ -32,7 +33,7 @@ import io.netty.buffer.ByteBuf;
 
 public abstract class DataType<T> implements IStringSerializer<T>, INBTSerializer<T>, IStreamSerializer<T>, IByteBufSerializer<T>
 {
-    public static final DataType<Boolean>   BOOLEAN   = new DataType<Boolean>()
+    public static final DataType<Boolean>   BOOLEAN    = new DataType<Boolean>()
     {
 
         @Override
@@ -102,7 +103,8 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
     };
     
-    public static final DataType<Byte>      BYTE      = new DataType<Byte>()
+    
+    public static final DataType<Byte>      BYTE       = new DataType<Byte>()
     {
 
         @Override
@@ -179,7 +181,8 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
     };
     
-    public static final DataType<Short>     SHORT     = new DataType<Short>()
+    
+    public static final DataType<Short>     SHORT      = new DataType<Short>()
     {
         @Override
         public Short readString(String text)
@@ -255,7 +258,8 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
     };
     
-    public static final DataType<Integer>   INTEGER   = new DataType<Integer>()
+    
+    public static final DataType<Integer>   INTEGER    = new DataType<Integer>()
     {
         @Override
         public Integer readString(String text)
@@ -331,7 +335,7 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
     };
     
-    public static final DataType<Long>      LONG      = new DataType<Long>()
+    public static final DataType<Long>      LONG       = new DataType<Long>()
     {
         @Override
         public Long readString(String text)
@@ -407,7 +411,7 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
     };
     
-    public static final DataType<Float>     FLOAT     = new DataType<Float>()
+    public static final DataType<Float>     FLOAT      = new DataType<Float>()
     {
         @Override
         public Float readString(String text)
@@ -483,7 +487,7 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
     };
     
-    public static final DataType<Double>    DOUBLE    = new DataType<Double>()
+    public static final DataType<Double>    DOUBLE     = new DataType<Double>()
     {
         @Override
         public Double readString(String text)
@@ -559,7 +563,7 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
     };
 
-    public static final DataType<String>    STRING    = new DataType<String>()
+    public static final DataType<String>    STRING     = new DataType<String>()
     {
         @Override
         public String readString(String text)
@@ -628,7 +632,8 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
     };
 
-    public static final DataType<Character> CHARACTER = new DataType<Character>()
+   
+    public static final DataType<Character> CHARACTER  = new DataType<Character>()
     {
         @Override
         public Character readString(String text)
@@ -697,7 +702,8 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
     };
     
-    public static final DataType<UUID>      UUID      = new DataType<UUID>()
+    
+    public static final DataType<UUID>      UUID       = new DataType<UUID>()
     {
         @Override
         public UUID readString(String text)
@@ -766,7 +772,7 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
     };
     
-    public static final DataType<BlockPos>  BLOCK_POS = new DataType<BlockPos>()
+    public static final DataType<BlockPos>  BLOCK_POS  = new DataType<BlockPos>()
     {
         String regex = "^BlockPos{x=-?[0-9]+, y=[0-9]+, z=-?[0-9]+}$";
         
@@ -799,7 +805,6 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         public void writeNBT(NBTTagCompound nbt, String name, BlockPos value)
         {
             NBTUtil.writeBlockPos(nbt, name, value);
-
         }
 
         @Override
@@ -839,8 +844,78 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         }
     };
     
+    public static final DataType<ItemStack> ITEM_STACK = new DataType<ItemStack>()
+    {       
+        @Override
+        public ItemStack readString(String text)
+        {
+            unsupportedOperation();
+            return null;
+        }
+
+        @Override
+        public String writeString(ItemStack value)
+        {
+            return value.toString();
+        }
+
+        @Override
+        public boolean checkParseType(String text)
+        {
+            return false;
+        }
+
+        @Override
+        public ItemStack readNBT(NBTTagCompound nbt, String name)
+        {
+            return ItemStack.loadItemStackFromNBT((NBTTagCompound) nbt.getTag(name));
+        }
+
+        @Override
+        public void writeNBT(NBTTagCompound nbt, String name, ItemStack value)
+        {
+            nbt.setTag(name, value.writeToNBT(new NBTTagCompound()));
+        }
+
+        @Override
+        public boolean checkTagType(NBTBase tag)
+        {
+            return tag instanceof NBTTagCompound;
+        }
+
+        @Override
+        public ItemStack readStream(DataInput data) throws IOException
+        {
+            return DataStreamUtil.readItemStack(data);
+        }
+
+        @Override
+        public void writeStream(DataOutput data, ItemStack value) throws IOException
+        {
+            DataStreamUtil.writeItemStack(data, value);
+        }
+
+        @Override
+        public ItemStack readBuffer(ByteBuf buffer)
+        {
+            return ByteBufUtils.readItemStack(buffer);
+        }
+
+        @Override
+        public void writeBuffer(ByteBuf buffer, ItemStack value)
+        {
+            ByteBufUtils.writeItemStack(buffer, value);
+        }
+        
+        @Override
+        public String getType()
+        {
+            return "ItemStack";
+        }
+    };
     
-  //TODO add ItemStack, nbt tag
+    
+  //TODO add , nbt tag
         
     public abstract String getType();
     
@@ -850,7 +925,7 @@ public abstract class DataType<T> implements IStringSerializer<T>, INBTSerialize
         return "data type: " + getType();
     }
     
-    private void unsupportedOperation()
+    private static void unsupportedOperation()
     {
         throw new UnsupportedOperationException();
     }
