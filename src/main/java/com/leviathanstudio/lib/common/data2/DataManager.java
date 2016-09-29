@@ -76,6 +76,22 @@ public class DataManager
 
     // *********************************************************************************************
 
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+            return true;
+
+        if (!(obj instanceof DataManager))
+            return false;
+
+        DataManager manager = (DataManager) obj;
+        return this.dataType.equals(manager.dataType) && this.dataValue.equals(manager.dataValue);
+
+    }
+
+    // *********************************************************************************************
+
     /**
      * Create a copy of data manager
      * 
@@ -747,7 +763,7 @@ public class DataManager
     }
 
     /**
-     * Set a new int value for an entry
+     * Set a new integer value for an entry
      * 
      * @param key
      *            The name of the entry
